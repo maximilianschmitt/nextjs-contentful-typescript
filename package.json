@@ -1,0 +1,41 @@
+{
+	"name": "nextjs-contentful-typescript",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"format": "prettier --write .",
+		"types": "yarn types:contentful",
+		"types:contentful": "export $(cat .env.local | awk '!/^\\s*#/' | awk '!/^\\s*$/'); cf-content-types-generator --spaceId $CONTENTFUL_SPACE_ID --token $CONTENTFUL_MANAGEMENT_TOKEN -o src/contentful/types -X && prettier --write src/contentful/types"
+	},
+	"dependencies": {
+		"@contentful/rich-text-react-renderer": "^15.16.4",
+		"@tailwindcss/typography": "^0.5.9",
+		"next": "13.4.2",
+		"react": "18.2.0",
+		"react-dom": "18.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "20.1.4",
+		"@types/react": "18.2.6",
+		"@types/react-dom": "18.2.4",
+		"autoprefixer": "10.4.14",
+		"cf-content-types-generator": "^2.12.2",
+		"eslint": "8.40.0",
+		"eslint-config-next": "13.4.2",
+		"postcss": "8.4.23",
+		"prettier": "^2.8.8",
+		"tailwindcss": "3.3.2",
+		"typescript": "5.0.4"
+	},
+	"prettier": {
+		"printWidth": 120,
+		"semi": false,
+		"singleQuote": true,
+		"tabWidth": 4,
+		"useTabs": true
+	}
+}
