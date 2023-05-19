@@ -1,4 +1,5 @@
 import { draftMode } from 'next/headers'
+import { redirect } from 'next/navigation'
 const { CONTENTFUL_PREVIEW_SECRET } = process.env
 
 export async function GET(request: Request) {
@@ -9,14 +10,5 @@ export async function GET(request: Request) {
 
 	draftMode().enable()
 
-	// FIXME: This is a workaround because draftMode().enable() does
-	// not work as expected when followed by a redirect.
-	// See: https://github.com/vercel/next.js/issues/49237
-	// redirect(searchParams.get('redirect') || '/')
-	return new Response(null, {
-		status: 307,
-		headers: {
-			Location: searchParams.get('redirect') || '/',
-		},
-	})
+	redirect(searchParams.get('redirect') || '/')
 }
